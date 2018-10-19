@@ -28,5 +28,5 @@ for fi  in $(git diff origin/master  --name-only --diff-filter=ARCM | grep -P -v
   done
 [ "$lib" ] || exit
 echo "===========================FIX FILES===================================="
-[ -f "$lib" ] || cd $dname && echo "Downloading: https://squizlabs.github.io/PHP_CodeSniffer/$lib" && curl -sOL "https://squizlabs.github.io/PHP_CodeSniffer/$lib"
+[ -f "./$lib" ] || $(cd $dname && curl -sOL "https://squizlabs.github.io/PHP_CodeSniffer/$lib")
 [ "$fixphpcs" ] && cd $dname && $phppath "./$lib" -p -s -v --warning-severity=0  --standard=phpcs.xml  --colors --report-width=200  --ignore-annotations --report=full,code,summary $fixphpcs
